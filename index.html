@@ -73,7 +73,6 @@ button{
     position:fixed;
     width:8px;height:8px;
     border-radius:50%;
-    background:yellow;
     animation:explode 1s ease-out forwards;
 }
 @keyframes explode{
@@ -103,7 +102,7 @@ button{
     <div id="asking">
         <h3>Will you give me a forever hug? 💞</h3>
         <button id="yesBtn">Tight Hug 🤗</button><br>
-        <button id="noBtn">Sharma rahi ho 😜</button>
+        <button id="noBtn">Itni asaani se nahi 😏</button>
     </div>
 
     <div id="celebration">
@@ -122,26 +121,25 @@ button{
         <div id="slideshow">
             <img id="slideImg" src="p1.jpeg">
         </div>
-
-        <h3 style="margin-top:20px;">🔥 Valentine Mega Combo 💖</h3>
-        <p>
-        🌹 Rose Day – You are my favorite flower<br>
-        💍 Promise Day – Forever yours<br>
-        🤗 Hug Day – Safest in my arms<br>
-        💋 Kiss Day – Sealed with love<br>
-        ❤️ Valentine – Always & Forever
-        </p>
     </div>
 </div>
 
 <script>
 
-/* Moving NO Button */
+/* Moving NO Button with changing text */
 const noBtn=document.getElementById("noBtn");
+const noTexts=[
+"Pakad sakte ho to pakad lo 😜",
+"Itna easy nahi 🤭",
+"Dil already tumhara hai ❤️",
+"Try again hero 😎"
+];
+
 noBtn.onclick=()=>{
     noBtn.style.position="absolute";
     noBtn.style.left=Math.random()*80+"vw";
     noBtn.style.top=Math.random()*80+"vh";
+    noBtn.innerText=noTexts[Math.floor(Math.random()*noTexts.length)];
 };
 
 /* YES Click */
