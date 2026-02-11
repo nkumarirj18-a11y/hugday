@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hug Day Nikki 🤗❤️</title>
+
+<style>
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:radial-gradient(circle,#ff8ac6,#2b0020);
+    font-family:'Segoe UI',sans-serif;
+    overflow:hidden;
+    color:#fff;
+}
+
+/* Card */
+.card{
+    width:92%;
+    max-width:420px;
+    background:rgba(0,0,0,0.65);
+    backdrop-filter:blur(16px);
+    border-radius:25px;
+    padding:25px;
+    text-align:center;
+    z-index:10;
+    box-shadow:0 0 40px hotpink;
+}
+
+button{
+    border:none;
+    border-radius:30px;
+    padding:12px 25px;
+    margin-top:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+#yesBtn{background:hotpink;color:#2b0020;}
+#noBtn{background:transparent;color:#ccc;border:1px solid #aaa;}
+
+#celebration{display:none;}
+
+/* Floating Hearts */
+.bg-heart{
+    position:fixed;
+    top:-50px;
+    font-size:22px;
+    animation:fall linear forwards;
+    pointer-events:none;
+}
+@keyframes fall{to{transform:translateY(110vh);opacity:0;}}
+
+/* Sparkle */
+.sparkle{
+    position:fixed;
+    width:6px;height:6px;
+    background:white;
+    border-radius:50%;
+    box-shadow:0 0 10px white;
+    animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+    from{opacity:0.3;transform:scale(0.6);}
+    to{opacity:1;transform:scale(1.5);}
+}
+
+/* Firework */
+.firework{
+    position:fixed;
+    width:8px;height:8px;
+    border-radius:50%;
+    background:yellow;
+    animation:explode 1s ease-out forwards;
+}
+@keyframes explode{
+    from{transform:scale(1);opacity:1;}
+    to{transform:scale(15);opacity:0;}
+}
+
+/* Slideshow */
+#slideshow{
+    margin-top:15px;
+}
+#slideshow img{
+    width:100%;
+    border-radius:15px;
+    box-shadow:0 0 20px hotpink;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="hugSong" src="audio/hug.mp3"></audio>
+
+<div class="card">
+    <h2>Happy Hug Day Nikki 🤗❤️</h2>
+
+    <div id="asking">
+        <h3>Will you give me a forever hug? 💞</h3>
+        <button id="yesBtn">Tight Hug 🤗</button><br>
+        <button id="noBtn">Sharma rahi ho 😜</button>
+    </div>
+
+    <div id="celebration">
+        <h3>My Hug Promises 💕</h3>
+        <p>
+        🤗 My arms will always protect you.<br>
+        🤗 My hugs will heal your sadness.<br>
+        🤗 You are my forever comfort zone.<br>
+        🤗 I love you endlessly ❤️
+        </p>
+
+        <div id="typewriter"></div>
+        <div id="hugAnimation" style="margin-top:15px;"></div>
+
+        <h3 style="margin-top:20px;">📸 Our Beautiful Memories 💖</h3>
+        <div id="slideshow">
+            <img id="slideImg" src="p1.jpeg">
+        </div>
+
+        <h3 style="margin-top:20px;">🔥 Valentine Mega Combo 💖</h3>
+        <p>
+        🌹 Rose Day – You are my favorite flower<br>
+        💍 Promise Day – Forever yours<br>
+        🤗 Hug Day – Safest in my arms<br>
+        💋 Kiss Day – Sealed with love<br>
+        ❤️ Valentine – Always & Forever
+        </p>
+    </div>
+</div>
+
+<script>
+
+/* Moving NO Button */
+const noBtn=document.getElementById("noBtn");
+noBtn.onclick=()=>{
+    noBtn.style.position="absolute";
+    noBtn.style.left=Math.random()*80+"vw";
+    noBtn.style.top=Math.random()*80+"vh";
+};
+
+/* YES Click */
+document.getElementById("yesBtn").onclick=()=>{
+    document.getElementById("asking").style.display="none";
+    document.getElementById("celebration").style.display="block";
+    document.getElementById("hugSong").play();
+    typeWriter();
+    startHugAnimation();
+    photoFloat();
+    startFireworks();
+    startSlideshow();
+};
+
+/* Typewriter */
+function typeWriter(){
+    const text="Nikki… my arms will always wait for you 🤗❤️";
+    let i=0;
+    const box=document.getElementById("typewriter");
+    box.innerHTML="";
+    (function type(){
+        if(i<text.length){
+            box.innerHTML+=text.charAt(i++);
+            setTimeout(type,50);
+        }
+    })();
+}
+
+/* Hug Emoji Animation */
+function startHugAnimation(){
+    document.getElementById("hugAnimation").innerHTML=
+    `<div style="font-size:60px;animation:pulse 1.5s infinite;">🤗❤️</div>`;
+}
+
+/* Floating Photos */
+function photoFloat(){
+    const photos=[...Array(14)].map((_,i)=>`p${i+1}.jpeg`);
+    setInterval(()=>{
+        const img=document.createElement("img");
+        img.src=photos[Math.floor(Math.random()*photos.length)];
+        img.style.position="absolute";
+        img.style.width="70px";
+        img.style.borderRadius="10px";
+        img.style.left=Math.random()*90+"vw";
+        img.style.top="100vh";
+        img.style.transition="6s linear";
+        document.body.appendChild(img);
+        setTimeout(()=>img.style.top="-100px",100);
+        setTimeout(()=>img.remove(),6000);
+    },1200);
+}
+
+/* Fireworks */
+function startFireworks(){
+    for(let i=0;i<20;i++){
+        const fw=document.createElement("div");
+        fw.className="firework";
+        fw.style.left=Math.random()*100+"vw";
+        fw.style.top=Math.random()*100+"vh";
+        fw.style.background=`hsl(${Math.random()*360},100%,60%)`;
+        document.body.appendChild(fw);
+        setTimeout(()=>fw.remove(),1000);
+    }
+}
+
+/* Continuous Background Hearts */
+setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="bg-heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(Math.random()*3+5)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),8000);
+},400);
+
+/* Sparkle */
+setInterval(()=>{
+    const s=document.createElement("div");
+    s.className="sparkle";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),2000);
+},300);
+
+/* Slideshow */
+function startSlideshow(){
+    const photos=[...Array(14)].map((_,i)=>`p${i+1}.jpeg`);
+    let index=0;
+    setInterval(()=>{
+        index=(index+1)%photos.length;
+        document.getElementById("slideImg").src=photos[index];
+    },2500);
+}
+
+</script>
+
+</body>
+</html>
